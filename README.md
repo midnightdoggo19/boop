@@ -2,7 +2,7 @@
 
 Clone the repo:
 ```
-git clone https://github.com/midnightdoggo19/boop
+gh repo clone midnightdoggo19/boop
 ```
 Enter the new directory:
 ```
