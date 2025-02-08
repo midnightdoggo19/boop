@@ -2,11 +2,7 @@ const {
     Client, 
     GatewayIntentBits, 
     REST, 
-    Routes, 
-    ModalBuilder, 
-    TextInputBuilder, 
-    TextInputStyle, 
-    ActionRowBuilder, 
+    Routes,
     Events 
 } = require('discord.js');
 
