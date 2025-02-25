@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -18,6 +18,12 @@ module.exports = {
         const user = interaction.options.getUser('user');
         if (!user) return interaction.edirReply('Could not find the user.');
 
-        await interaction.editReply(`Boop <@${user.id}>!`);
+        const embed = new EmbedBuilder()
+            .setTitle('Boop!')
+            .setDescription(`<@${interaction.user.id}> booped <@${user.id}>!`)
+            .setImage('https://media1.tenor.com/m/1Ssp5wMkhfkAAAAC/boop-cat-boop.gif')
+            .setTimestamp();
+
+        await interaction.editReply({ embeds: [embed] });
 	},
 };
