@@ -5,16 +5,29 @@ const {
     Routes,
     Events 
 } = require('discord.js');
-
+const winston = require('winston');
 require('dotenv').config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent] });
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
+const logger = winston.createLogger({
+    level: process.env.LOGLEVEL || 'info',
+    format: winston.format.combine(
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        winston.format.printf(info => `[${info.timestamp}] ${info.level.toUpperCase()}: ${info.message}`)
+    ),
+    transports: [
+        new winston.transports.Console(),
+        new winston.transports.File({ filename: 'boop.log' }),
+    ]
+});
+
 const commands = [
     {
         name: 'boop', // command name
         description: 'Boop',
+	type: 1,
         options: [
             {
                 name: 'message',
