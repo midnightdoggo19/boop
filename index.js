@@ -3,69 +3,57 @@ const {
     GatewayIntentBits, 
     REST, 
     Routes,
-    Events 
+    Events, 
+    Collection
 } = require('discord.js');
-const winston = require('winston');
-require('dotenv').config();
+const { logger } = require('./functions');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent] });
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
-const logger = winston.createLogger({
-    level: process.env.LOGLEVEL || 'info',
-    format: winston.format.combine(
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        winston.format.printf(info => `[${info.timestamp}] ${info.level.toUpperCase()}: ${info.message}`)
-    ),
-    transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({ filename: 'boop.log' }),
-    ]
-});
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
 
-const commands = [
-    {
-        name: 'boop', // command name
-        description: 'Boop',
-	type: 1,
-        options: [
-            {
-                name: 'message',
-                type: 6,
-                description: 'Person to boop',
-                required: true,
-            },
-        ],
-    },
-];
+client.commands = new Collection();
 
-(async () => {
-try {
-    console.log('Registering slash commands...');
-    await rest.put(
-        Routes.applicationCommands(process.env.CLIENT_ID),
-        { body: commands }
-    );
-    console.log('Slash commands registered!');
-} catch (err) {
-    console.error('Error registering slash commands:', err);
-}})();
-
-client.on(Events.InteractionCreate, async (interaction) => {
-    if (!interaction.isCommand()) return;
-
-    if (interaction.commandName === 'boop') {
-        const user = interaction.options.getUser('message');
-        if (!user) return interaction.reply('Could not find the user.');
-
-        await interaction.reply(`Boop <@${user.id}>!`);
-    }
-});
-
-if (!process.env.TOKEN || !process.env.CLIENT_ID) {
-    logger.error('Missing TOKEN or CLIENT_ID in the environment variables.');
-    process.exit(1);
+for (const folder of commandFolders) {
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		// Set a new item in the Collection with the key as the command name and the value as the exported module
+		if ('data' in command && 'execute' in command) {
+			client.commands.set(command.data.name, command);
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
 }
+
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+		}
+	}
+});
 
 client.login(process.env.TOKEN).then(() => {
     logger.info('Discord bot is online!');
