@@ -20,7 +20,7 @@ module.exports = {
         if (!user) return interaction.edirReply('Could not find the user.');
 
         const embed = new EmbedBuilder()
-            .setTitle('Boop!')
+            .setTitle('Bonk!')
             .setDescription(`<@${interaction.user.id}> bonked <@${user.id}>!`)
             .setImage('https://media1.tenor.com/m/udpvUVcjpZAAAAAC/bonk.gif')
             .setTimestamp();
