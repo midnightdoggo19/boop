@@ -22,7 +22,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle('Bonk!')
             .setDescription(`<@${interaction.user.id}> bonked <@${user.id}>!`)
-            .setImage('https://media1.tenor.com/m/udpvUVcjpZAAAAAC/bonk.gif')
+            .setImage('https://midnightdoggo19.com/assets/boop/bonk_optimized.gif')
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed] });
