@@ -22,7 +22,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle('Boop!')
             .setDescription(`<@${interaction.user.id}> booped <@${user.id}>!`)
-            .setImage('https://media1.tenor.com/m/1Ssp5wMkhfkAAAAC/boop-cat-boop.gif')
+            .setImage('https://midnightdoggo19.com/assets/boop/boop_optimized.gif')
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed] });
