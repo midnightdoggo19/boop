@@ -17,7 +17,7 @@ module.exports = {
 		await interaction.deferReply();
 
         const user = interaction.options.getUser('user');
-        if (!user) return interaction.edirReply('Could not find the user.');
+        if (!user) return interaction.editReply('Could not find the user.');
 
         const embed = new EmbedBuilder()
             .setTitle('high quality title © 2025 Midnight Doggo')
