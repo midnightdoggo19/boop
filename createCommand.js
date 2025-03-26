@@ -40,5 +40,5 @@ module.exports = {
     },
 };
 `);
-console.log('Paste the above command into a new Javascript file in commands/utility');
+console.log(`Paste the above command into a new file: commands/utility/$`{commandName});
 console.log('If you\'d like to further customize the command, you can do so now');
