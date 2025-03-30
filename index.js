@@ -41,14 +41,6 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
-	} else if (interaction.commandName === 'suggest') { // because DMing from the command files is hard
-		if (process.env.SUGGESTIONSENABLED != true || !process.env.OWNER) { await interaction.reply({ content: 'Suggestions are currently disabled', flags: 64 }) }
-		const suggestion = interaction.options.getString('suggestion');
-		logger.info(`New suggestion from ${interaction.user.username}: ${suggestion}`);
-		await interaction.deferReply({ flags: 64 });
-        await client.users.send(process.env.OWNER, `New suggestion from ${interaction.user.username}: ${suggestion}`); // you don't need to worry about this if you're hosting yourself
-		await interaction.editReply({ content: 'Suggestion sent!', flags: 64 });
-		return;
 	}
 
 	try {
