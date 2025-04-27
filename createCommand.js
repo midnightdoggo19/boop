@@ -6,7 +6,7 @@ const verb = prompt('Verb (user 1 ___ user2; user to ___): ');
 const embedTitle = prompt('Embed title: ');
 const imgURL = prompt('Image URL: ');
 
-console.log('Creating command...');
+console.log('Creating command...\n');
 console.log(`
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { logger } = require('../../functions');
@@ -40,5 +40,6 @@ module.exports = {
     },
 };
 `);
-console.log(`Paste the above command into a new file: commands/utility/$`{commandName});
+
+console.log(`Paste the above command into a new file: commands/utility/${commandName}.js`);
 console.log('If you\'d like to further customize the command, you can do so now');
