@@ -6,7 +6,7 @@
     "register": "node deploy.js"
   },
   "dependencies": {
-    "discord.js": "^14.17.3",
+    "discord.js": "^14.19.3",
     "dotenv": "^16.4.7",
     "prompt-sync": "^4.2.0",
     "winston": "^3.17.0"
