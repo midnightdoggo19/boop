@@ -1,5 +1,6 @@
-const winston = require('winston');
+const { createLogger, transports, format } = require('winston');
 require('dotenv').config();
+const Transport = require('winston-transport');
 
 class DiscordTransport extends Transport {
     constructor(opts) {
