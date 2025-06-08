@@ -22,7 +22,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle('boogie robots')
             .setDescription(`<@${interaction.user.id}> is dancing at <@${user.id}>!`)
-            .setImage('https://midnightdoggo19.com/assets/boop/dance_optimized.gif')
+            .setImage('https://midnightdoggo19.com/assets/boop/dancing_optimized.gif')
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed] });
