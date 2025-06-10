@@ -20,7 +20,7 @@ class DiscordTransport extends Transport {
                 body: JSON.stringify({
                     embeds: [
                         {
-                            title: `Ticket Log`,
+                            title: 'Boop Log',
                             description: info.message,
                             color: 16711680,
                             timestamp: new Date().toISOString()
