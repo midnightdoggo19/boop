@@ -3,11 +3,11 @@ const { logger } = require('../../log');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('punch')
-        .setDescription('punch somebody')
+        .setName('dance')
+        .setDescription('dance the night away')
         .addUserOption(option =>
             option.setName('user')
-            .setDescription('user to punch')
+            .setDescription('user to dance at')
             .setRequired(true)
         )
         .setContexts(0, 1, 2)
@@ -20,12 +20,12 @@ module.exports = {
         if (!user) return interaction.editReply('Could not find the user.');
 
         const embed = new EmbedBuilder()
-            .setTitle('wham')
-            .setDescription(`<@${interaction.user.id}> punched <@${user.id}>!`)
-            .setImage('https://midnightdoggo19.com/assets/boop/punch_optimized.gif')
+            .setTitle('boogie robots')
+            .setDescription(`<@${interaction.user.id}> is dancing at <@${user.id}>!`)
+            .setImage('https://midnightdoggo19.com/assets/boop/dancing_optimized.gif')
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed] });
-        logger.debug(`${interaction.user.id} punched ${user.id}`);
+        logger.debug(`${interaction.user.id} dance at ${user.id}`);
     },
 };

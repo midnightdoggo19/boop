@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { logger } = require('../../functions');
+const { logger } = require('../../log');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,6 +26,6 @@ module.exports = {
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed] });
-        logger.debug(`${interaction.user.id} stinks according to ${user.id}`);
+        logger.debug(`${user.id} stinks according to ${interaction.user.id}`);
     },
 };

@@ -6,7 +6,7 @@ const {
     Events, 
     Collection
 } = require('discord.js');
-const { logger } = require('./functions');
+const { logger } = require('./log');
 const fs = require('node:fs');
 const path = require('node:path');
 

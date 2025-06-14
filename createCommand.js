@@ -9,7 +9,7 @@ const imgURL = prompt('Image URL: ');
 console.log('Creating command...\n');
 console.log(`
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { logger } = require('../../functions');
+const { logger } = require('../../log');
 
 module.exports = {
     data: new SlashCommandBuilder()
