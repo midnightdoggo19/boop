@@ -26,6 +26,6 @@ module.exports = {
             .setTimestamp();
 
         await interaction.editReply({ embeds: [embed] });
-        logger.debug(`${interaction.user.id} dance at ${user.id}`);
+        logger.debug(`${interaction.user.id} danced at ${user.id}`);
     },
 };
