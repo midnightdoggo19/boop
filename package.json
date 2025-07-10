@@ -2,8 +2,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node index.js",
-    "register": "node deploy.js"
+    "start": "node .",
+    "register": "node deploy.js",
+    "testFate": "node ./commands/utility/fortune.js"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
