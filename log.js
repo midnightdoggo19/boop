@@ -49,7 +49,7 @@ const logger = createLogger({
     ),
     transports: [ // log to console, discord, file
         new transports.Console(),
-        new transports.File({ filename: `./tickets.log` }),
+        new transports.File({ filename: `./boop.log` }),
         new DiscordTransport()
     ]
 });
