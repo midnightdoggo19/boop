@@ -1,11 +1,17 @@
 const { createLogger, transports, format } = require('winston');
 require('dotenv').config();
 const Transport = require('winston-transport');
+const { isUrl } = require('check-valid-url');
+
+let url;
+
+if (!isUrl(process.env.LOGHOOK)) url = 'http://example.com/' // dump it
+else url = process.env.LOGHOOK;
 
 class DiscordTransport extends Transport {
     constructor(opts) {
         super(opts);
-        this.webhookUrl = process.env.LOGHOOK || 'https://midnightdoggo19.com/api/dontcare'; // will just ignore everything
+        this.webhookUrl = url;
     }
 
     async log(info, callback) {

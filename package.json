@@ -7,8 +7,9 @@
     "testFate": "node ./commands/utility/fortune.js"
   },
   "dependencies": {
-    "dotenv": "^16.5.0",
+    "check-valid-url": "^0.1.0",
     "discord.js": "^14.20.0",
+    "dotenv": "^16.5.0",
     "prompt-sync": "^4.2.0",
     "winston": "^3.17.0",
     "winston-transport": "^4.9.0"
