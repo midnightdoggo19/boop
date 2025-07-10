@@ -15,7 +15,8 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('fortune')
 		.setDescription('See what fate has in store')
-        .setContexts(0, 1),
+        .setContexts(0, 1, 2)
+        .setIntegrationTypes(0, 1),
 
 	async execute(interaction) {
         await interaction.deferReply();
