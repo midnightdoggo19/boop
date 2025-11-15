@@ -46,11 +46,15 @@ client.on(Events.InteractionCreate, async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(error);
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', flags: 64 });
-		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', flags: 64 });
+		try {
+			console.error(error);
+			if (interaction.replied || interaction.deferred) {
+				await interaction.followUp({ content: 'There was an error while executing this command!', flags: 64 });
+			} else {
+				await interaction.reply({ content: 'There was an error while executing this command!', flags: 64 });
+			}
+		} catch (anothererror) {
+			console.error(`Something went very wrong. Here it is:\n ${anothererror}`);
 		}
 	}
 });
