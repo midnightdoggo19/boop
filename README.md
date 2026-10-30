@@ -2,11 +2,11 @@
 
 Clone the repo:
 ```
-gh repo clone midnightdoggo19/boop
+git clone https://github.com/midnightdoggo19/boop.git
 ```
 Enter the new directory:
 ```
-cd say
+cd boop
 ```
 Install dependencies:
 ```
